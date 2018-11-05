@@ -1,3 +1,32 @@
 server:
   port: 8080
 
+spring:
+  datasource:
+    druid:
+      url: jdbc:mysql://118.89.173.110:3306/wsm?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false
+      username: root
+      password: MyNewPass4!
+      initial-size: 1
+      max-active: 20
+      min-idle: 1
+      # 配置获取连接等待超时的时间
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validation-query: SELECT 'x'
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: true
+      #配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      time-between-eviction-runs-millis: 60000
+      #配置一个连接在池中最小生存的时间，单位是毫秒
+      min-evictable-idle-time-millis: 300000
+
+      application:
+          name: silin-space
+  mvc:
+    view:
+      prefix: /views
+      suffix: .jsp
+

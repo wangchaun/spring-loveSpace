@@ -1,0 +1,59 @@
+*{
+    padding: 0;margin: 0;
+}
+html,body{
+    font-family:"Microsoft YaHei",sans-serif;color: #333;font-size: 14px;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;color: #666;
+}
+
+/**************/
+.box{
+    width: 95%;height: auto;border: 1px solid #dedede;margin: 40px auto;background: #f9f9f9;
+}
+.all{
+    width: 90%;height: auto;margin: 10px auto;overflow: hidden;
+}
+.top-img{
+    width: 80%;height: auto;font-size: 0;position: relative;
+}
+.activeimg{
+    overflow: hidden;height: 300px;position: relative;
+}
+.top-img .activeimg img{
+    width: 25%;height: 300px;
+}
+.top-img .left{
+    width: 15%;height: 100px;background: rgba(0,0,0,0.4);position: absolute;left: 0;top: 0;text-align: center;line-height: 300px;
+    cursor: pointer;
+}
+.top-img .right{
+    width: 15%;;height: 300px;background: rgba(0,0,0,0.4);position: absolute;left:420px;top: 0;text-align: center;line-height: 300px;
+    cursor: pointer;
+}
+.top-img .left:hover,.top-img .right:hover{
+    background: rgba(0,0,0,0.5);
+}
+
+.bot-img{
+    height: 90px;width: 500px;margin-top: 15px
+}
+.bot-img ul{
+    width: 100%;height: 100px;
+}
+.bot-img ul li{
+    width: 90px;margin-right: 10px;float: left;border: 1px solid #fff;cursor: pointer;font-size: 0;
+}
+.bot-img ul li.active{
+    border: 1px solid #ff6600;
+}
+.bot-img ul li img{
+    width: 100%;
+}
+.bot-img ul li:last-child{
+    margin-right: 0;
+}

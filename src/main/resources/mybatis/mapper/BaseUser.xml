@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BaseUserDAO">
+	<resultMap id="result" type="com.love.silin.dao.user.BaseUserDO">
+		<id property="id" column="id" />
+		<result property="loverId" column="lover_id" />
+		<result property="userName" column="user_name" />
+		<result property="passWord" column="pass_word" />
+		<result property="createTime" column="create_time" />
+		<result property="yn" column="Yn" />
+	</resultMap>
+	
+	<sql id="insert_columns">
+            <if test="loverId != null">,lover_id</if>
+            <if test="userName != null">,user_name</if>
+            <if test="passWord != null">,pass_word</if>
+            <if test="createTime != null">,create_time</if>
+            <if test="yn != null">Yn</if>
+	</sql>
+	
+	<sql id="insert_all_columns">
+			lover_id
+            ,user_name
+            ,pass_word
+            ,create_time
+            ,Yn
+	</sql>
+
+	<sql id="insert_values">
+          <if test="loverId != null">,#{loverId}</if>
+          <if test="userName != null">,#{userName}</if>
+          <if test="passWord != null">,#{passWord}</if>
+          <if test="createTime != null">,#{createTime}</if>
+          <if test="yn != null">,#{yn}</if>
+	</sql>
+
+    <sql id="batch_insert_values">
+            #{item.loverId}
+            ,#{item.userName}
+            ,#{item.passWord}
+            ,#{item.createTime}
+            ,#{item.yn}
+    </sql>
+    
+    <sql id="insert_all_values">
+            #{loverId}
+            ,#{userName}
+            ,#{passWord}
+            ,#{createTime}
+            ,#{yn}
+    </sql>
+	
+	<insert id="insertHasId" parameterType="com.love.silin.dao.user.BaseUserDO" useGeneratedKeys="false">
+		insert into user(
+			id
+			<include refid="insert_columns" />
+		)values(
+			#{id}
+			<include refid="insert_values" />
+		)
+	</insert>
+	
+	<insert id="batchInsertHasId"  parameterType="java.util.List" useGeneratedKeys="false">
+		insert into user(
+			id,
+			<include refid="insert_all_columns" />
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+		    #{item.id},
+            <include refid="batch_insert_values" />
+		)
+		</foreach>
+	</insert>
+
+	<insert id="insert" parameterType="com.love.silin.dao.user.BaseUserDO" useGeneratedKeys="true" keyProperty="id">
+		insert into user(
+			<include refid="insert_all_columns" />
+		)values(
+			<include refid="insert_all_values" />
+		)
+	</insert>
+
+	<insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true">
+		insert into user(
+			<include refid="insert_all_columns" />
+		)values
+		<foreach collection="list" item="item" index="index" separator=",">
+		(
+            <include refid="batch_insert_values" />
+		)
+		</foreach>
+	</insert>
+
+	<update id="update" parameterType="com.love.silin.dao.user.BaseUserDO">
+        update user
+        <set>
+            <if test="loverId != null"> lover_id=#{loverId}, </if>
+            <if test="userName != null"> user_name=#{userName}, </if>
+            <if test="passWord != null"> pass_word=#{passWord}, </if>
+            <if test="createTime != null"> create_time=#{createTime}, </if>
+            <if test="yn != null"> Yn=#{yn}, </if>
+        </set>
+		where id=#{id}
+	</update>
+
+	<update id="updateByField" parameterType="java.util.HashMap">
+        update user
+        <set>
+            <if test="template.loverId != null"> lover_id=#{template.loverId}, </if>
+            <if test="template.userName != null"> user_name=#{template.userName}, </if>
+            <if test="template.passWord != null"> pass_word=#{template.passWord}, </if>
+            <if test="template.createTime != null"> create_time=#{template.createTime}, </if>
+            <if test="template.yn != null"> Yn=#{template.yn}, </if>
+        </set>
+		<where>
+            <if test="condition.id != null"> and id=#{condition.id}</if>
+            <if test="condition.loverId != null"> and lover_id=#{condition.loverId}</if>
+            <if test="condition.userName != null"> and user_name=#{condition.userName}</if>
+            <if test="condition.passWord != null"> and pass_word=#{condition.passWord}</if>
+            <if test="condition.createTime != null"> and create_time=#{condition.createTime}</if>
+            <if test="condition.yn != null"> and Yn=#{condition.yn}</if>
+        </where>
+	</update>
+
+	<select id="select" parameterType="java.util.Map" resultMap="result">
+		<include refid="select_all_column" />
+		from user 
+		where id=#{id}
+		<if test="isLock"> for update </if>
+	</select>
+
+	<select id="selectListByIdList" parameterType="java.util.Map" resultMap="result">
+		<include refid="select_all_column" />
+		from user
+		<where>
+			<if test="idList != null">
+			id in
+			<foreach item="item" index="index" collection="idList" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+			</if>
+		</where>
+		<if test="isLock"> for update </if>
+	</select>
+
+	<select id="selectEOByEO" parameterType="java.util.Map" resultMap="result">
+		<include refid="select_all_column" />
+		from user
+		<include refid="where_all" />
+	</select>
+	
+	<sql id="select_all_column">
+		select ID
+            ,lover_id
+            ,user_name
+            ,pass_word
+            ,create_time
+            ,Yn
+	</sql>
+
+	<sql id="where_all">
+		<where>
+            <include refid="condition_all" />
+		</where>
+	</sql>
+
+    <sql id="condition_all">
+        <if test="condition.id != null"> and id=#{condition.id} </if>
+        <if test="condition.loverId != null"> and lover_id=#{condition.loverId} </if>
+        <if test="condition.userName != null and condition.userName != ''"> and user_name=#{condition.userName} </if>
+        <if test="condition.passWord != null and condition.passWord != ''"> and pass_word=#{condition.passWord} </if>
+        <if test="condition.createTime != null"> and create_time=#{condition.createTime} </if>
+        <if test="condition.yn != null and condition.yn != ''"> and Yn=#{condition.yn} </if>
+    </sql>
+
+	<delete id="delete" parameterType="com.love.silin.dao.user.BaseUserDO">
+		delete from user
+		where id=#{id}
+	</delete>
+
+</mapper>
