@@ -32,7 +32,7 @@ public class DiaryController {
 
     @RequestMapping("/diaryServlet")
     @ApiOperation(httpMethod = "POST", value = "test insertDiary")
-    public String insertDiary(DiaryPostData diaryPostData, HttpServletRequest request){
+    public String insertDiary(DiaryPostData diaryPostData, HttpServletRequest request) throws Exception{
         String user = (String) request.getSession().getAttribute("user");
         diaryPostData.setUser(user);
         diaryService.insertDiary(diaryPostData);

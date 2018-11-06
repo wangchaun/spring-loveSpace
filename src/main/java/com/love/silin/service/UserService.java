@@ -1,7 +1,9 @@
 package com.love.silin.service;
 
+import com.love.silin.base.Constants;
 import com.love.silin.dao.user.BaseUserDO;
 import com.love.silin.dao.user.UserDAO;
+import com.love.silin.util.RSAUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -23,7 +25,7 @@ public class UserService {
     public void insertUser(BaseUserDO baseUserDO){
         userDAO.insert(baseUserDO);
     }
-    public boolean register(String name, String password){
+    public boolean register(String name, String password) throws Exception{
 
         BaseUserDO baseUserDOc = new BaseUserDO();
         baseUserDOc.setUserName(name);
@@ -38,7 +40,7 @@ public class UserService {
         baseUserDO.setCreateTime(new Date());
         baseUserDO.setLoverId(null);
         baseUserDO.setUserName(name);
-        baseUserDO.setPassWord(password);
+        baseUserDO.setPassWord(RSAUtils.publicEncrypt(password, RSAUtils.getPublicKey(Constants.RSA_ENCRYPT.PUBLIC_KEY)));
         baseUserDO.setYn("Y");
         userDAO.insert(baseUserDO);
 
@@ -46,7 +48,7 @@ public class UserService {
     }
 
 
-    public Boolean checkUserExits(String name, String password){
+    public Boolean checkUserExits(String name, String password) throws Exception{
 
         BaseUserDO baseUserDO = new BaseUserDO();
         baseUserDO.setUserName(name);
@@ -56,8 +58,9 @@ public class UserService {
         if(baseUserDOFind == null){
             return false;
         }
+        String passwordDb = RSAUtils.privateDecrypt(baseUserDOFind.getPassWord(), RSAUtils.getPrivateKey(Constants.RSA_ENCRYPT.PRIVATE_KEY));
 
-        if(!baseUserDOFind.getPassWord().equals(password)){
+        if(!passwordDb.equals(password)){
             return false;
         }
 

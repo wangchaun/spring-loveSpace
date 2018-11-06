@@ -6,6 +6,7 @@ import com.love.silin.dao.diary.DiaryDAO;
 import com.love.silin.dao.user.BaseUserDO;
 import com.love.silin.dao.user.UserDAO;
 import com.love.silin.model.DiaryPostData;
+import com.love.silin.util.RSAUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,7 +32,7 @@ public class DiaryService {
     UserDAO userDAO;
 
 
-    public void insertDiary(DiaryPostData diaryPostData){
+    public void insertDiary(DiaryPostData diaryPostData) throws Exception{
 
         //1、查找对应的用户
         BaseUserDO baseUserDOc = new BaseUserDO();
@@ -64,7 +65,9 @@ public class DiaryService {
         sb.append("<br>");
         sb.append(diaryPostData.getDiary());
 
-        baseDiaryDO.setContent(sb.toString());
+        String encodedData = RSAUtils.publicEncrypt(sb.toString(), RSAUtils.getPublicKey(Constants.RSA_ENCRYPT.PUBLIC_KEY));
+
+        baseDiaryDO.setContent(encodedData);
         diaryDAO.insert(baseDiaryDO);
 
     }
@@ -136,7 +139,7 @@ public class DiaryService {
      * @throws IOException
      */
     public void showDiary(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException{
+            throws Exception{
 
         String fileId = request.getParameter("fileName");
 
@@ -151,7 +154,8 @@ public class DiaryService {
 
         String content = baseDiaryDOS.get(0).getContent();
 
-        for(char c : content.toCharArray()){
+        String decodedData = RSAUtils.privateDecrypt(content, RSAUtils.getPrivateKey(Constants.RSA_ENCRYPT.PRIVATE_KEY));
+        for(char c : decodedData.toCharArray()){
             if(c == ' '){
                 out.append("&nbsp");
             }else{

@@ -25,7 +25,7 @@ public class RegisterController {
     }
 
     @RequestMapping("/registerServlet")
-    public String register(HttpServletRequest request, String name, String password, String passwordConfirm){
+    public String register(HttpServletRequest request, String name, String password, String passwordConfirm) throws Exception{
 
         if(!password.equals(passwordConfirm)) {
             String errorMessage = "注册错误：两次输入密码不一致！";

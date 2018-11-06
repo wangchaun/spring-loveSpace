@@ -21,7 +21,7 @@ public class LoginController {
     UserService userService;
 
     @RequestMapping("/loginServlet")
-    public String login(String name, String password, HttpServletRequest request){
+    public String login(String name, String password, HttpServletRequest request) throws Exception{
 
 
         if(userService.checkUserExits(name, password)){
