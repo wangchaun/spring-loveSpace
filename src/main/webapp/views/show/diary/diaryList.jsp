@@ -13,7 +13,7 @@
 <head>
 
 </head>
-<body background="/resources/img/diaryback1.jpeg">
+<body background="/resources/img/diaryback1.jpg">
 
     <div id="div" style="text-align:center;display: block; margin-left:10%;margin-top:0%;width:80%; height:100%; border:0px solid #000;">
         <div data-options="region: 'north', split: true, title: ''" style="height: 80px;">

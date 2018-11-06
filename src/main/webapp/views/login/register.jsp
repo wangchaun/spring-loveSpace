@@ -13,7 +13,7 @@
     <title>欢迎注册！</title>
 
 </head>
-<body style="background-image: url(/resources/img/back.jpeg)">
+<body style="background-image: url(/resources/img/register.jpg)">
 <div id="div" style="margin-left:40%;margin-top:10%;width:30%; height:30%; border:0px solid #000;">
     <span style="color:palevioletred;font-weight:bolder;font-size:25px">请填写以下信息注册：</span>
     <br>

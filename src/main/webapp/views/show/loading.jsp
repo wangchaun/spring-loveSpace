@@ -351,7 +351,7 @@
 
 </head>
 
-<body background="/resources/img/back2.jpeg">
+<body background="/resources/img/back2.jpg">
 
 <!-- source image and inspiration from Ramiro Galan on Dribbble: http://dribbble.com/shots/674715-Sparkle-Light-Trail -->
 <canvas id="c"></canvas>

@@ -12,7 +12,7 @@
     <title>💗 登陆 思淋空间 💗</title>
 
 </head>
-<body style="background-image: url(/resources/img/back.jpeg)">
+<body style="background-image: url(/resources/img/back.jpg)">
 
 
 <div id="div" style="margin-left:40%;margin-top:10%;width:30%; height:30%; border:0px solid #000;">
