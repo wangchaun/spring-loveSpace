@@ -92,13 +92,14 @@ public class DiaryService {
 
 
         BaseDiaryDO baseDiaryDOCondition = new BaseDiaryDO();
-        baseDiaryDOCondition.setLoverId(baseUserDOFind.getLoverId());
+        baseDiaryDOCondition.setLoverId(baseUserDOFind.getId());
         baseDiaryDOCondition.setPrivacy("public");
 
         List<BaseDiaryDO> baseDiaryDOS = diaryDAO.selectListByEO(baseDiaryDOCondition);
 
         baseDiaryDOCondition.setUserName(userName);
-        baseDiaryDOCondition.setPrivacy("private");
+        baseDiaryDOCondition.setLoverId(null);
+        baseDiaryDOCondition.setPrivacy(null);
 
         List<BaseDiaryDO> baseDiaryDOS1 = diaryDAO.selectListByEO(baseDiaryDOCondition);
 
