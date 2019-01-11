@@ -36,7 +36,6 @@
 
 </head>
 <body class="home blog landing">
-
 <div id="page-wrapper">
     <!-- Header -->
     <header id="header" class="alt">
@@ -68,9 +67,10 @@
                 </li>	</ul>
         </nav>
     </header>
+    <div id="dlg" class=""></div>
     <!-- Banner -->
     <section id="banner">
-        <h2>思淋空间</h2>
+        <h2>田心沐木</h2>
         <p>爱你的人，永远爱你</p>
         <ul class="actions">
             <li> <c:if test="${user eq nul}">
@@ -82,8 +82,6 @@
             </li>	<li><a href="/views/show/diary/diary.jsp" class="button">告白</a></li>
         </ul>
     </section>
-
-    <div id="dlg"></div>
 
     <!-- Main -->
     <section id="main" class="container">
@@ -152,11 +150,12 @@
     function uploadMemory() {
         d=$("#dlg").dialog({
             title: '上传照片',
-            width: 950,
-            height: 400,
+            width: 450,
+            height: 150,
             href:'/file',
             maximizable:true,
             modal: true,
+            top:120,
             autoCloseOnEsc: true,
             buttons:[{
                 text:'上传',
@@ -167,7 +166,7 @@
                         loadMsg();
                         //在本页上处理，也就是ajax，如果是非false，则传统的form跳转。
                         $("#mainform").ajaxSubmit(options);
-                        return false;
+                        d.panel('close');
                     }
                 }
             },{

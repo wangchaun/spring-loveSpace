@@ -14,6 +14,7 @@
 <%--<link rel="stylesheet" type="text/css" href="/resources/css/style.css">--%>
 
 <script type="text/javascript" src="/resources/easyui/js/jquery.min.js"></script>
+<script type="text/javascript" src="/resources/js/jquery.form.js"></script>
 <script type="text/javascript" src="/resources/js/photo.js"></script>
 <script type="text/javascript" src="/resources/js/vegas.min.js"></script>
 <script type="text/javascript" src="/resources/easyui/js/jquery.easyui.min.js"></script>
@@ -28,25 +29,74 @@
         keyControlFlag = true;
         $.messager.progress({
             title:'提示信息',
-            msg:'正在处理，请稍后……'
+            msg:'正在处理，请稍后……',
+            top:80
         });
         //load();
     }
     function afterError()
     {
     }
+    var options = {
+        dataType:'json',
+        // 处理之后的处理
+        success:  showResponse,
+//        complete:  showResponse,
+        error:  showResponse
+    };
+    function showResponse(responseText, statusText, xhr, $form) {
+        console.log(responseText);
+        disLoad();
+//        var st = responseText.responseText;
+        if (responseText.result == "success")
+        {
+            showInfo(responseText.message);
+            cx();
+            debugger;
+            $("#dlg").dialog().panel('close');
+
+        }
+        else
+        {
+            showInfo(responseText.message, "error");
+        }
+    }
+    function strToObj(json){
+        return eval("("+json+")");
+    }
+
+    //取消加载层
+    function disLoad() {
+        /*  $(".datagrid-mask").remove();
+         $(".datagrid-mask-msg").remove();   */
+        $.messager.progress('close');
+        keyControlFlag = false;
+    }
 
     function showInfo(msg, level)
     {
         if (level == 'error')
         {
-            $.messager.alert('错误提醒',msg, 'error', function(){ afterError() });
+            $.messager.alert({
+            title:'错误提醒',
+            msg:msg,
+            icon: 'error',
+            top:80
+
+        });
         }
         else
         {
-            $.messager.alert('淋宝',msg,'info');
+            $.messager.alert({
+                title:'提示',
+                msg:msg,
+                icon: 'info',
+                top:80
+
+            });
         }
     }
+
 
 </script>
 

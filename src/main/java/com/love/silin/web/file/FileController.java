@@ -1,15 +1,20 @@
 package com.love.silin.web.file;
 
+import com.love.silin.base.BaseController;
+import com.love.silin.base.SiLinException;
+import com.love.silin.dao.user.BaseUserDO;
+import com.love.silin.service.FileService;
 import com.love.silin.util.BaseUtils;
+import com.love.silin.web.UserController;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.*;
 import java.util.UUID;
 
@@ -21,10 +26,12 @@ import java.util.UUID;
  * @create: 2019-01-10 17:58
  **/
 @Controller
-public class FileController {
+public class FileController extends BaseController {
 
-    private final String linuxFilePath = "/silin/memory/";
-    private final String windowsFilePath = "D://silin//memory";
+    private static final Logger logger = LoggerFactory.getLogger(FileController.class);
+
+    @Resource
+    FileService fileService;
 
     @GetMapping(value = "/file")
     public String file() {
@@ -32,28 +39,15 @@ public class FileController {
     }
 
     @PostMapping(value = "/fileUpload")
+    @ResponseBody
     public String fileUpload(@RequestParam(value = "file") MultipartFile file, Model model, HttpServletRequest request) {
-        if (file.isEmpty()) {
-            System.out.println("文件为空空");
-        }
-        String fileName = file.getOriginalFilename();  // 文件名
-        String suffixName = fileName.substring(fileName.lastIndexOf("."));  // 后缀名
-        String filePath = windowsFilePath; // 上传后的路径
-        if(BaseUtils.isOSLinux()){
-            filePath = linuxFilePath;
-        }
-        fileName = UUID.randomUUID() + suffixName; // 新文件名
-        File dest = new File(filePath + fileName);
-        if (!dest.getParentFile().exists()) {
-            dest.getParentFile().mkdirs();
-        }
+        String userName = (String)request.getSession().getAttribute("user");
         try {
-            file.transferTo(dest);
-        } catch (IOException e) {
-            e.printStackTrace();
+            fileService.uploadFileByUser(userName, file);
+            return returnSuccess("处理成功", request);
+        }catch (SiLinException e){
+            return handlerException(e.getMessage(), request);
         }
-        String filename = linuxFilePath + fileName;
-        model.addAttribute("filename", filename);
-        return "/file/uploadFile";
+
     }
 }
