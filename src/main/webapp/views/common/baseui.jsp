@@ -51,7 +51,6 @@
         if (responseText.result == "success")
         {
             showInfo(responseText.message);
-            cx();
             debugger;
             $("#dlg").dialog().panel('close');
 

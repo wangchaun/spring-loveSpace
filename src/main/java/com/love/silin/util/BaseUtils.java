@@ -14,6 +14,7 @@ public class BaseUtils {
     public static boolean isOSLinux() {
         Properties prop = System.getProperties();
         String os = prop.getProperty("os.name");
+        System.out.println(os);
         if (os != null && os.toLowerCase().indexOf("linux") > -1) {
             return true;
         } else {

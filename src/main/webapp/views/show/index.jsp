@@ -44,7 +44,7 @@
             <ul>
                 <li id="menu-item-36228" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-36228"><a href="/firstServlet?firstPassword=5201314">首页</a></li>
                 <li id="menu-item-397" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-397"><a href="/views/show/diary/diary.jsp">告白吧</a></li>
-                <li id="menu-item-2625" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2625"><a href="/shop">查看我们的回忆</a></li>
+                <li id="menu-item-2625" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2625"><a href="/photoList">查看我们的回忆</a></li>
                 <li id="menu-item-2734" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2734"><a onclick="uploadMemory()">上传回忆</a></li>
                 <li id="menu-item-36638" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36638"><a href="https://www.bbai520.com/qingtou">情侣头像</a></li>
                 <li id="menu-item-2732" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2732"><a href="https://www.bbai520.com/documentation">文档</a>
@@ -89,7 +89,7 @@
         <section class="box special">
             <header class="major">
                 <!--
-    <div class="search d4">
+            <div class="search d4">
                 <form  method="get" id="searchform" action="https://www.bbai520.com/">
                   <input type="text" name="s" placeholder="搜索从这里开始...">
                   <button type="submit"></button>
@@ -129,8 +129,8 @@
 
 </div>
 <!-- 返回顶部 -->
-<div id="moquu_wxin" class="moquu_wxin"><a href="/about"><div class="moquu_wxinh"></div></a></div>
-<div id="moquu_wshare" class="moquu_wshare"><a href="javascript:void(0)"><div class="moquu_wshareh"></div></a></div>
+<%--<div id="moquu_wxin" class="moquu_wxin"><a href="/about"><div class="moquu_wxinh"></div></a></div>--%>
+<%--<div id="moquu_wshare" class="moquu_wshare"><a href="javascript:void(0)"><div class="moquu_wshareh"></div></a></div>--%>
 <script src="https://pics.bbai520.com/wp-content/themes/sweet/assets/js/backtop.js"></script>
 <!-- 返回顶部结束 -->
 <!-- Scripts -->

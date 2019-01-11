@@ -38,6 +38,12 @@ public class FileController extends BaseController {
         return "/file/uploadFile";
     }
 
+    @RequestMapping("/photoList")
+    public String diaryServletList(Model model, HttpServletRequest request){
+        model.addAttribute("file", "/silin/memory/wx.png");
+        return "/file/photoList";
+    }
+
     @PostMapping(value = "/fileUpload")
     @ResponseBody
     public String fileUpload(@RequestParam(value = "file") MultipartFile file, Model model, HttpServletRequest request) {
