@@ -27,7 +27,7 @@ public class LoginController {
         if(userService.checkUserExits(name, password)){
             HttpSession se = request.getSession();
             se.setAttribute("user", name);
-            return "/show/loading";
+            return "/show/index";
         }
 
         String errorMessage = "登入错误：账号密码不一致或不存在该账号！<br> 请重新输入！";

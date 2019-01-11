@@ -33,6 +33,8 @@
         Our goal is to solve all the dissatisfaction!
         <br>
         你还可以浏览或编辑以前日记～<a href="/diaryServletList">点击传送门</a>
+         <a href="/firstServlet?firstPassword=5201314">
+            <span style="color:black;font-weight:bolder;">返回首页</span></a>
 
     </span>
     <br>
@@ -69,8 +71,6 @@
         今天我....
         </textarea>
         <input type="submit" value="提交日记！">
-        <a href="/views/show/loading.jsp">
-            <span style="color:black;font-weight:bolder;font-size:5px">返回主页</span></a>
 
     </form>
 
@@ -81,7 +81,7 @@
 
     if (${sessionScope.user == null}) {
         alert("请重新登陆 baby~~")
-        window.location.href = "/";
+        window.location.href = "/firstServlet?firstPassword=5201314";
     }
 
 </script>

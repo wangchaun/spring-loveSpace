@@ -18,7 +18,7 @@ public class FirstController {
     @RequestMapping("/firstServlet")
     public String firstServlet(String firstPassword){
         if("5201314".equals(firstPassword)){
-            return "/login/login";
+            return "/show/index";
         }
 
         return "/common/error";
