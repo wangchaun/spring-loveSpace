@@ -25,6 +25,10 @@ ul {
 	width: 980px;
 	height: 500px;
 }
+/*#wrap {*/
+	/*width: 652px;*/
+	/*height: 812px;*/
+/*}*/
 
 #wrap li {
 	position: absolute;
@@ -68,6 +72,9 @@ $(function () {
 	var wrap = $('#wrap');
 	var w = wrap.width() / rows;
 	var h = wrap.height() / collums;
+//
+//    var w = 652 / rows;
+//    var h = 812/ collums;
 
 
 	for (var r = 0; r < rows; r++) {
@@ -96,6 +103,9 @@ $(function () {
 	wrap.find('li').on('click', function () {
 		if (change == true) {
 			var bgImg = $(this).find('div').css('background-image');
+			var widthImg = bgImg.naturalWidth;
+			var heightImg = bgImg.naturalHeight;
+
 			var bgLeft = 0;
 			var bgTop = 0;
 			$('#wrap li').each(function (index) {
@@ -106,6 +116,8 @@ $(function () {
 						'translateX(0)' +
 						'translateY(0)'
 					});
+					$this.width(w);
+					$this.height(h);
 					$this.find('div').css({
 						'background-image': bgImg,
 						'background-size': 'auto',
@@ -113,9 +125,9 @@ $(function () {
 						'backgroundPositionY': -bgTop,
 						'transform': 'scale(1)'
 					});
-					bgLeft += 196;
-					if (bgLeft >= 980) {
-						bgTop += 100;
+					bgLeft += w;
+					if (bgLeft >= wrap.width()) {
+						bgTop += h;
 						bgLeft = 0;
 					}
 					$this.animate({"opacity":1},300);
