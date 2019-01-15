@@ -48,6 +48,12 @@ public class FileService {
             throw new SiLinException("请先登陆");
         }
 
+        //查找对象id，这样可以展示对象上传的照片
+        baseUserDO.setUserName(null);
+        baseUserDO.setId(baseUserDOFind.getId());
+        BaseUserDO loveDo = userDAO.selectByEO(baseUserDO);
+
+
         List<String> photos = new ArrayList<>();
 
         String filePath = SystemConstants.getPhotoPath(baseUserDOFind.getUserName());
@@ -58,6 +64,8 @@ public class FileService {
         for(int i=0;i<files.size();i++){
             String curName = files.get(i).getPath();//获取文件名字
             if(curName.contains(baseUserDOFind.getId().toString())){
+                iconNameList.add(curName);
+            }else if (curName.contains(loveDo.getId().toString())){
                 iconNameList.add(curName);
             }
 
