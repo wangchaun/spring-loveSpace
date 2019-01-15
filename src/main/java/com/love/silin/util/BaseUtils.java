@@ -17,8 +17,10 @@ public class BaseUtils {
         System.out.println(os);
         if (os != null && os.toLowerCase().indexOf("linux") > -1) {
             return true;
-        } else {
+        } else if (os != null && os.toLowerCase().indexOf("mac") > -1){
             return true;
+        }else {
+            return false;
         }
     }
 }

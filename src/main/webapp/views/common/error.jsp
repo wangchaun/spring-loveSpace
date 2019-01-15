@@ -15,9 +15,11 @@
 <div id="div" style="margin-left:40%;margin-top:10%;width:30%; height:30%; border:0px solid #000;">
     ❌错误❌
     <br>
+    ${errorMessqge}
     <br>
-    <a href="/views/common/first.jsp">
-        <span style="color:rebeccapurple;font-weight:bolder;font-size:25px">返回</span></a>
+    <br>
+    <a href="/firstServlet?firstPassword=5201314"><span style="color:black;font-weight:bolder;">返回首页</span></a>
+
 
 </div>
 

@@ -16,6 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -40,8 +42,17 @@ public class FileController extends BaseController {
 
     @RequestMapping("/photoList")
     public String diaryServletList(Model model, HttpServletRequest request){
-        model.addAttribute("file", "/silin/memory/wx.png");
-        return "/file/photoList";
+        String userName = (String)request.getSession().getAttribute("user");
+
+        try {
+            List<String> photos = fileService.getMemoryPhotosByUserId(userName);
+            model.addAttribute("photos", photos);
+        }catch (Exception e){
+            logger.error("photoList={}",e);
+            model.addAttribute("errorMessqge", e.getMessage());
+            return "/common/error";
+        }
+        return "/file/photos";
     }
 
     @PostMapping(value = "/fileUpload")
@@ -52,6 +63,7 @@ public class FileController extends BaseController {
             fileService.uploadFileByUser(userName, file);
             return returnSuccess("处理成功", request);
         }catch (SiLinException e){
+            logger.error("photoList={}",e);
             return handlerException(e.getMessage(), request);
         }
 
