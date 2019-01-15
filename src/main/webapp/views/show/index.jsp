@@ -80,6 +80,8 @@
                     欢迎${user}baby
                 </c:if>
             </li>	<li><a href="/views/show/diary/diary.jsp" class="button">告白</a></li>
+            <li><a onclick="uploadMemory()">上传回忆</a></li>
+            <li><a href="/photoList">查看我们的回忆</a></li>
         </ul>
     </section>
 

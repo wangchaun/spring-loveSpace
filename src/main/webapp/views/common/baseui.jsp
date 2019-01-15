@@ -50,7 +50,7 @@
 //        var st = responseText.responseText;
         if (responseText.result == "success")
         {
-            showInfo(responseText.message);
+            showInfo(responseText.message, "success");
             debugger;
             $("#dlg").dialog().panel('close');
 
@@ -72,27 +72,25 @@
         keyControlFlag = false;
     }
 
-    function showInfo(msg, level)
+    function showInfo(msgs, level)
     {
         if (level == 'error')
         {
-            $.messager.alert({
-            title:'错误提醒',
-            msg:msg,
-            icon: 'error',
-            top:80
-
-        });
+//            $.messager.alert({
+//            title:'错误提醒',
+//            msg:msgs,
+//            icon: 'error'
+//            });
+            $.messager.alert("错误提醒", msgs, "error");
         }
         else
         {
-            $.messager.alert({
-                title:'提示',
-                msg:msg,
-                icon: 'info',
-                top:80
-
-            });
+            $.messager.alert("提示", msgs, "info");
+//            $.messager.alert({
+//                title:'提示',
+//                msg:msgs,
+//                icon: 'info'
+//            });
         }
     }
 
