@@ -46,7 +46,7 @@
                 <li id="menu-item-397" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-397"><a href="/views/show/diary/diary.jsp">告白吧</a></li>
                 <li id="menu-item-2625" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2625"><a href="/photoList">查看我们的回忆</a></li>
                 <li id="menu-item-2734" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2734"><a onclick="uploadMemory()">上传回忆</a></li>
-                <li id="menu-item-36638" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36638"><a href="https://www.bbai520.com/qingtou">情侣头像</a></li>
+                <li id="menu-item-36638" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-36638"><a href="/diaryServletList">我们的故事</a></li>
                 <li id="menu-item-2732" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-has-children menu-item-2732"><a href="https://www.bbai520.com/documentation">文档</a>
                     <ul class="sub-menu">
                         <li id="menu-item-402" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-402"><a href="https://www.bbai520.com/65.html">制作指南</a></li>
@@ -54,8 +54,8 @@
                         <li id="menu-item-36635" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36635"><a href="https://www.bbai520.com/about">关于&#038;合作</a></li>
                     </ul>
                 </li>
-                <li id="menu-item-36219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36219"><a href="https://www.bbai520.com/app">下载客户端</a></li>
-                <li id="menu-item-41678" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-41678"><a href="https://www.bbai520.com/36282.html">『你的故事，我想听』</a></li>
+                <%--<li id="menu-item-36219" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-36219"><a href="https://www.bbai520.com/app">下载客户端</a></li>--%>
+                <li id="menu-item-41678" class="menu-item menu-item-type-post_type menu-item-object-post menu-item-41678"><a href="/views/show/diary/diary.jsp">『你的故事，我想听』</a></li>
                 <li>
                     <c:if test="${user eq nul}">
                         <a href="/views/login/login.jsp" class="button">登录</a>
@@ -80,8 +80,12 @@
                     欢迎${user}baby
                 </c:if>
             </li>	<li><a href="/views/show/diary/diary.jsp" class="button">告白</a></li>
-            <li><a onclick="uploadMemory()">上传回忆</a></li>
-            <li><a href="/photoList">查看我们的回忆</a></li>
+            <br>
+            <div id="mobileShow" hidden="hidden">
+                <li><a onclick="uploadMemory()">上传回忆</a></li>
+                <br>
+                <li><a href="/photoList">查看我们的回忆</a></li>
+            </div>
         </ul>
     </section>
 
@@ -108,8 +112,7 @@
 
     </section>
 
-
-    <!-- Footer -->
+            <!-- Footer -->
     <footer id="footer">
         <ul class="icons">
             <li><a target="_blank" href="http://wpa.qq.com/msgrd?v=3&uin=741702321&site=qq&menu=yes" class="icon fa-qq"><span class="label">QQ</span></a></li>
@@ -124,7 +127,7 @@
         <ul class="beian">
             <li><a target="_blank" href="http://www.miibeian.gov.cn/" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" title=""><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">沪ICP备15003379号-1</p></a></li><li><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=52052202522438" style="display:inline-block;text-decoration:none;height:20px;line-height:20px;" title=""><img src="https://pics.bbai520.com/wp-content/uploads/2016/06/beian.png" style="width:auto;float:left;"><p style="float:left;height:20px;line-height:20px;margin: 0px 0px 0px 5px; color:#939393;">公网安备 52052202522438号</p></a></li>	</ul>
         <ul class="footerlink">
-            <li><a href="http://www.baidu.com" title="" target="_blank" >百度一下</a></li> <li><script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1254921471'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1254921471' type='text/javascript'%3E%3C/script%3E"));</script></li>
+            <li><a href="http://www.baidu.com" title="" target="_blank" >百度一下</a></li>
         </ul>
 
     </footer>
@@ -147,6 +150,20 @@
 <script type="text/javascript">
     function  showImg(){document.getElementById("wxImg").style.display='block';}
     function hideImg(){document.getElementById("wxImg").style.display='none';}
+
+    try{
+        var str = navigator.userAgent;
+
+        console.log("navigator.userAgent", str);
+        if(str.indexOf("iPhone")!= -1
+          || str.indexOf("Android")!= -1
+            || str.indexOf("webOS")!= -1
+            || str.indexOf("BlackBerry")!= -1){
+            console.log("navigator.getin");
+            document.getElementById("mobileShow").removeAttribute("hidden");
+        }
+    }catch(e){}
+
 
     //上传回忆
     function uploadMemory() {

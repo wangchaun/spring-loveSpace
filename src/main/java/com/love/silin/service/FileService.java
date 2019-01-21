@@ -34,7 +34,7 @@ public class FileService {
     private static final Logger logger = LoggerFactory.getLogger(FileService.class);
 
 
-    public List<String> getMemoryPhotosByUserId(String userName) throws Exception{
+    public List<String> getMemoryPhotosByUserId(String userName, int beginPage) throws Exception{
 
         if (StringUtils.isBlank(userName)){
             throw new SiLinException("请先登陆");
@@ -70,7 +70,27 @@ public class FileService {
             }
 
         }
-        return iconNameList;
+
+        //分页处理，一页12个，根据起始页，算出来
+        ArrayList<String> returnFileList = new ArrayList<>();
+        for (int i = 0; i<16; i++){
+            returnFileList.add(SystemConstants.LOGO_PATH);
+        }
+
+        int index = 0;
+        if(iconNameList.size() > (beginPage - 1) * 16){
+            for (int i = (beginPage - 1) * 16; i<iconNameList.size(); i++){
+                returnFileList.set(index, iconNameList.get(i));
+                index++;
+
+                //满了就退出
+                if(index == 16){
+                    break;
+                }
+            }
+        }
+
+        return returnFileList;
     }
 
     public ArrayList<File> getFiles(String path) throws Exception {
@@ -90,7 +110,7 @@ public class FileService {
             }
         }
 
-        ArrayList<File> sortedList = (ArrayList<File>) fileList.stream().sorted((f1, f2)->(int)(f1.lastModified()-f2.lastModified())).collect(Collectors.toList());;
+        ArrayList<File> sortedList = (ArrayList<File>) fileList.stream().sorted((f1, f2)->(int)(f2.lastModified()-f1.lastModified())).collect(Collectors.toList());;
         return sortedList;
     }
 

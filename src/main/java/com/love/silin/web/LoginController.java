@@ -27,6 +27,7 @@ public class LoginController {
         if(userService.checkUserExits(name, password)){
             HttpSession se = request.getSession();
             se.setAttribute("user", name);
+            se.setAttribute("pageNum", 1);
             return "/show/index";
         }
 

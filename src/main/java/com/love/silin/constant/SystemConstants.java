@@ -24,4 +24,6 @@ public class SystemConstants {
         return filePath;
     }
 
+    public static final String LOGO_PATH = "/resources/img/logo.png";
+
 }

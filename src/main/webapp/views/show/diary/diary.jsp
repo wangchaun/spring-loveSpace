@@ -33,6 +33,8 @@
         Our goal is to solve all the dissatisfaction!
         <br>
         你还可以浏览或编辑以前日记～<a href="/diaryServletList">点击传送门</a>
+        &nbsp;
+        &nbsp;
          <a href="/firstServlet?firstPassword=5201314">
             <span style="color:black;font-weight:bolder;">返回首页</span></a>
 

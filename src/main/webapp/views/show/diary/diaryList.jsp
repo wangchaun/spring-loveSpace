@@ -38,7 +38,6 @@
                     <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" plain="true" onclick="deleDiary()">
                         删除日记
                     </a>
-                    <a href="/firstServlet?firstPassword=5201314"><span style="color:black;font-weight:bolder;">返回首页</span></a>
                     <a style="float:right" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-filter" id="btnSetFilter" plain="true" onclick="filter()">
                         过滤
                     </a>
@@ -99,8 +98,10 @@
         <a href="/views/show/diary/diary.jsp">
             <span style="color:rebeccapurple;font-weight:bolder;font-size:15px">返回继续提交日记</span></a>
         <br>
+        <a href="/firstServlet?firstPassword=5201314"><span style="color:rebeccapurple;font-weight:bolder;font-size:15px">返回首页</span></a>
+        <br>
         <a href="/views/show/loading.jsp">
-            <span style="color:rebeccapurple;font-weight:bolder;font-size:15px">返回主页</span></a>
+            <span style="color:rebeccapurple;font-weight:bolder;font-size:10px">返回旧版主页</span></a>
         <br>
     </div>
 <div id="dlg"></div>

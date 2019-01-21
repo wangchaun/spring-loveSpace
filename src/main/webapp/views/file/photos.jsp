@@ -2,10 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>相册</title>
+<title>幸福💗相册</title>
 
 <style type="text/css">
 * {
@@ -22,12 +22,13 @@ ul {
 }
 
 #wrap {
-	width: 980px;
-	height: 500px;
+	width: 784px;
+	height: 400px;
 }
+
 /*#wrap {*/
-	/*width: 652px;*/
-	/*height: 812px;*/
+	/*width: 346px;*/
+	/*height: 600px;*/
 /*}*/
 
 #wrap li {
@@ -54,6 +55,39 @@ ul {
 	bottom: 0;
 
 }
+a {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+
+a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+.previous {
+    background-color: #f1f1f1;
+    color: black;
+    position: absolute;
+    left: 200px;
+    top: 88%;
+}
+
+.next {
+    background-color: #4CAF50;
+    color: white;
+    position: absolute;
+    left: 900px;
+    top: 88%;
+}
+.pageNumClass {
+    background-color: #4CAF50;
+    color: white;
+    position: absolute;
+    left: 550px;
+    top: 89%;
+}
 </style>
 
 <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
@@ -67,11 +101,11 @@ ul {
 
 
 $(function () {
-	var collums = 5;//列
-	var rows = 5;//行
+	var collums = 4;//列
+	var rows = 4;//行
 	var wrap = $('#wrap');
-	var w = wrap.width() / rows;
-	var h = wrap.height() / collums;
+	var w = wrap.width() / collums;
+	var h = wrap.height() / rows;
 //
 //    var w = 652 / rows;
 //    var h = 812/ collums;
@@ -103,9 +137,6 @@ $(function () {
 	wrap.find('li').on('click', function () {
 		if (change == true) {
 			var bgImg = $(this).find('div').css('background-image');
-			var widthImg = bgImg.naturalWidth;
-			var heightImg = bgImg.naturalHeight;
-
 			var bgLeft = 0;
 			var bgTop = 0;
 			$('#wrap li').each(function (index) {
@@ -168,8 +199,9 @@ $(function () {
 </head>
 <body>
 <a href="/firstServlet?firstPassword=5201314"><span style="color:black;font-weight:bolder;">返回首页</span></a>
-<span style="color:black;font-weight:bolder;">幸福回忆</span>
 <ul id="wrap" class="center"></ul>
-
+<a href="/prePhotoList" class="previous">&laquo; 上一页</a>
+<span class="pageNumClass">当前第${sessionScope.pageNum}页</span>
+<a href="/nextPhotoList" class="next">下一页 &raquo;</a>
 </body>
 </html>
